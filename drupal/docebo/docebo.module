@@ -5,8 +5,19 @@
  * Hook called when a user is created in drupal
  * Used for userbase sync.
  */
-function docebo_user_insert(&$edit, $account, $category) {
+function docebo_user_presave(&$edit, $account, $category) {
 
+	if ($account->is_new) {
+
+		$userdata['userid']=$account->name;
+		$userdata['email']=$account->mail;
+		$userdata['password']=$account->pass;
+		$userdata['ext_user']=$account->uid;
+		$userdata['ext_user_type']='drupal';
+		
+		$res =docebo_request('createuser', $userdata);
+		//file_put_contents('log2.txt', var_export($res, true));
+	}
 }
 
 
@@ -18,13 +29,12 @@ function docebo_user_update(&$edit, $account, $category) {
 
 	// file_put_contents('log1.txt', var_export($edit, true)."\n\n".var_export($account, true)."\n\n".var_export($category, true));
 	
-	$userdata['idst']='12160';
 	$userdata['userid']=$edit['name'];
 	$userdata['email']=$edit['mail'];
 	$userdata['ext_user']=$edit['uid'];
 	$userdata['ext_user_type']='drupal';
 	
-	$res =docebo_request('editUser', $userdata);
+	$res =docebo_request('updateuser', $userdata);
 	//file_put_contents('log2.txt', var_export($res, true));
 }
 
@@ -73,10 +83,10 @@ function docebo_request($service, $params) {
 			$curl = curl_init();
 			
 			$defaults = array(
-				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/updateuser/".$params['idst']."&auth=drupal", 
+				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/".$service."/&auth=drupal",
 				CURLOPT_RETURNTRANSFER=>1, 
 				CURLOPT_HTTPHEADER=>array("Content-Type: multipart/form-data"),
-				CURLOPT_POST=>1, 
+				CURLOPT_POST=>1,
 				CURLOPT_POSTFIELDS=>$params,
 			); 
 			

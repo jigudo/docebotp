@@ -45,7 +45,6 @@ function docebo_admin_form_validate($form, &$form_state) {
 function docebo_admin_form_submit($form, &$form_state) {
 
 	variable_set('docebo_url', $form_state['values']['title']);
-	print_r($form);
 
 	watchdog('docebo', 'Settings saved.', array(), WATCHDOG_NOTICE, l(t('view'), 'admin/config/system/docebo'));
 	drupal_set_message(t('Settings saved.', array()));

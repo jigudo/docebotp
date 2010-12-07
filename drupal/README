@@ -7,3 +7,6 @@ This module works with Drupal 7.x
 To use it copy the folder "docebo" inside the "modules" folder of your drupal installation and enable it from Drupal control panel. (Admin -> Modules)
 
 Once the module is active, click on "Configure" and fill in the required parameters.
+
+In order to test it, you'll also need to grab the latest version of the Docebo API from SVN:
+svn://85.94.193.146/var/svn/docebo_35x/trunk/api
