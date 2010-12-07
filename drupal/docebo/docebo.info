@@ -1,0 +1,10 @@
+; $Id: $
+
+name = Docebo
+description = Docebo module
+package = Core
+core = 7.x
+dependencies[] = user
+files[] = docebo.module
+files[] = docebo.admin.inc
+configure = admin/config/system/docebo

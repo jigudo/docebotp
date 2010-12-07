@@ -1,0 +1,109 @@
+<?php
+
+
+/**
+ * Hook called when a user is created in drupal
+ * Used for userbase sync.
+ */
+function docebo_user_insert(&$edit, $account, $category) {
+
+}
+
+
+/**
+ * Hook called when a user is update in drupal
+ * Used for userbase sync.
+ */
+function docebo_user_update(&$edit, $account, $category) {
+
+	// file_put_contents('log1.txt', var_export($edit, true)."\n\n".var_export($account, true)."\n\n".var_export($category, true));
+	
+	$userdata['idst']='12160';
+	$userdata['userid']=$edit['name'];
+	$userdata['email']=$edit['mail'];
+	$userdata['ext_user']=$edit['uid'];
+	$userdata['ext_user_type']='drupal';
+	
+	$res =docebo_request('editUser', $userdata);
+	//file_put_contents('log2.txt', var_export($res, true));
+}
+
+
+/**
+ * Hook called when a user login in drupal
+ * Used for single sign on
+ */
+function hook_user_login(&$edit, $account) {
+
+}
+
+
+/**
+ * Adds the Docebo menu item to the admin configuration page
+ */
+function docebo_menu() {
+	$items =array();
+	$items['admin/config/system/docebo'] = array(
+		'title' => 'Docebo',
+		'description' => '',
+		'page callback' => 'docebo_admin_display',
+		//'page arguments' => array($default_theme),
+		'access arguments' => array('administer'),
+		'file' => 'docebo.admin.inc',
+	);
+	
+	return $items;
+}
+
+
+/**
+ * Calls the Docebo API
+ */
+function docebo_request($service, $params) {
+
+	$docebo_url =variable_get('docebo_url');
+
+	if (!empty($docebo_url)) {
+		$auth =true;
+		if (!isset($_SESSION['docebo_auth_time']) || time()-$_SESSION['docebo_auth_time'] > 3600) {
+			//$auth =docebo_auth_request();
+		}	
+		
+		if (1 || $auth) {
+			$curl = curl_init();
+			
+			$defaults = array(
+				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/updateuser/".$params['idst']."&auth=drupal", 
+				CURLOPT_RETURNTRANSFER=>1, 
+				CURLOPT_HTTPHEADER=>array("Content-Type: multipart/form-data"),
+				CURLOPT_POST=>1, 
+				CURLOPT_POSTFIELDS=>$params,
+			); 
+			
+			curl_setopt_array($curl, $defaults);
+			
+			$result = curl_exec($curl);
+		}
+		else {
+			$result = $auth;
+		}
+	}
+	
+	return $result;
+}
+
+
+/**
+ * Authenticate with the Docebo API
+ */
+function docebo_auth_request() {
+	$docebo_url =variable_get('docebo_url');
+	
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $docebo_url."api/rest.php?q=/restAPI/auth/authenticate&auth=drupal");
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
+	$result = curl_exec($curl);
+	
+	return $result;
+}
