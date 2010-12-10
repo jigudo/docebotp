@@ -7,4 +7,6 @@ core = 7.x
 dependencies[] = user
 files[] = docebo.module
 files[] = docebo.admin.inc
+files[] = docebo.mycourses.inc
 configure = admin/config/system/docebo
+stylesheets[all][] = docebo.css

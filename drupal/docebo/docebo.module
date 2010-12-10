@@ -1,23 +1,36 @@
 <?php
 
+function docebo_init() {
+	//menu_rebuild();
+}
+
+
+/**
+ * Hook called before a user is created in drupal
+ * Used for userbase sync.
+ */
+function docebo_user_presave(&$edit, $account, $category) {
+	if ($account->is_new) {
+		$GLOBALS['plain_user_pass']=$account->pass;
+	}
+}
+
 
 /**
  * Hook called when a user is created in drupal
  * Used for userbase sync.
  */
-function docebo_user_presave(&$edit, $account, $category) {
+function docebo_user_insert(&$edit, $account, $category) {
 
-	if ($account->is_new) {
-
-		$userdata['userid']=$account->name;
-		$userdata['email']=$account->mail;
-		$userdata['password']=$account->pass;
-		$userdata['ext_user']=$account->uid;
-		$userdata['ext_user_type']='drupal';
-		
-		$res =docebo_request('createuser', $userdata);
-		//file_put_contents('log2.txt', var_export($res, true));
-	}
+	$userdata['userid']=$account->name;
+	$userdata['email']=$account->mail;
+	$userdata['password']=$GLOBALS['plain_user_pass'];
+	$userdata['ext_user']=$account->uid;
+	$userdata['ext_user_type']='drupal';
+	
+	unset($GLOBALS['plain_user_pass']);
+	
+	$res =docebo_request('createuser', $userdata);
 }
 
 
@@ -43,16 +56,24 @@ function docebo_user_update(&$edit, $account, $category) {
  * Hook called when a user login in drupal
  * Used for single sign on
  */
-function hook_user_login(&$edit, $account) {
-
+function docebo_user_login(&$edit, $account) {
+	/* $res =doceboGetAuth($account->name);
+	
+	if ($res) {
+		$docebo_url =variable_get('docebo_url');
+		//header('location: '.$docebo_url.'doceboLms/index.php?auth='.$res);
+		echo '<img src="'.$docebo_url.'doceboLms/index.php?auth='.$res.'" alt="sso" style="visibility: hidden;" />'; die();
+		return '<img src="'.$docebo_url.'doceboLms/index.php?auth='.$res.'" alt="sso" style="visibility: hidden;" />';		
+	} */
 }
 
-
+ 
 /**
  * Adds the Docebo menu item to the admin configuration page
  */
 function docebo_menu() {
 	$items =array();
+
 	$items['admin/config/system/docebo'] = array(
 		'title' => 'Docebo',
 		'description' => '',
@@ -62,28 +83,182 @@ function docebo_menu() {
 		'file' => 'docebo.admin.inc',
 	);
 	
+	$items['docebo'] = array(
+		'title' => 'LMS: My courses',
+		'description' => '',
+		'page callback' => 'docebo_mycourses_display',
+		//'access arguments' => array('access content'),
+		//'type' => MENU_NORMAL_ITEM,
+		//'position' => 'navigation',
+		//'access callback' => TRUE,
+		'access arguments' => array('access user mycourses'),
+		'file' => 'docebo.mycourses.inc',
+	);
+
 	return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ *
+ * This hook declares to Drupal what permissions are provided by the module.
+ */
+function docebo_permission() {
+  return array(
+    'access user mycourses' =>  array(
+      'title' => t('Access to the user\'s subscribed course list'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_block_info().
+ *
+ * This hook declares to Drupal what blocks are provided by the module.
+ */
+function docebo_block_info() {
+
+  $blocks['docebo_my_courses'] = array(
+    'info' => t('DoceboLMS: My courses'),
+  );
+  
+  $blocks['docebo_kb'] = array(
+    'info' => t('DoceboLMS: Content library'),
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ *
+ * This hook generates the contents of the blocks themselves.
+ */
+function docebo_block_view($delta = '') {
+	$block =array();
+  
+  switch ($delta) {
+    case 'docebo_my_courses': {
+      $block['subject'] = t('LMS: My courses');
+      $block['content'] = docebo_block_mycourses();
+    } break;
+	case 'docebo_kb': {
+      $block['subject'] = t('LMS: Search content library');
+      $block['content'] = docebo_block_kb();
+    } break;
+  }
+  return $block;
+}
+
+
+function docebo_block_mycourses() {
+	$res ='';
+
+	$data =docebo_get_mycourses_data();
+	$xml =new SimpleXMLElement($data);
+	$nodes =$xml->xpath('//course_info');
+	$auth =doceboGetAuth($GLOBALS['user']->name);
+	
+	$li_arr =array();
+	foreach($nodes as $item) {
+		$li_arr[]='<li><a href="'.$item->course_link.'&amp;auth='.$auth.'">'.$item->course_name.'</a></li>';
+	}
+	
+	if (!empty($li_arr)) {
+		$res ='<ul class="menu">'.implode("\n", $li_arr).'</ul>';
+	}
+
+	return $res;
+}
+
+
+function docebo_block_kb() {
+	$res ='';
+
+	$res.='<div class="container-inline">
+		<div class="form-item form-type-textfield form-item-search-block-form">';
+	$form =drupal_get_form('kb_search_box');
+	$res.=drupal_render($form);
+	$res.='</div></div>';
+
+	return $res;
+}
+
+
+/**
+ * Form builder; Output a search form for the search block's search box.
+ *
+ */
+function kb_search_box($form, &$form_state) {
+	$docebo_url =variable_get('docebo_url');
+
+	$form['filter_text'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Search'),
+		'#title_display' => 'invisible',
+		'#size' => 15,
+		'#default_value' => '',
+		'#attributes' => array('title' => t('Enter the terms you wish to search for.')),
+	);
+	$form['r'] = array(
+		'#type' => 'hidden',
+		'#value' => 'lms/kb/show',
+	);
+	$form['auth'] = array(
+		'#type' => 'hidden',
+		'#value' => doceboGetAuth($GLOBALS['user']->name),
+	);
+	$form['actions'] = array('#type' => 'actions');
+	$form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
+	$form['#action'] =$docebo_url.'doceboLms/index.php';
+	$form['#method'] ='get';
+
+	return $form;
+}
+
+
+
+/**
+ * Function used to grab the course list from
+ * the Docebo api
+ */
+function docebo_get_mycourses_data() {
+	$docebo_url =variable_get('docebo_url');
+	
+	$userdata['ext_user']=(int)$GLOBALS['user']->uid;
+	$userdata['ext_user_type']='drupal';
+	
+	if (isset($GLOBALS['docebo_mycourses_data'])) {
+		$data =$GLOBALS['docebo_mycourses_data'];
+	}
+	else {
+		$data =docebo_request('mycourses', $userdata, $GLOBALS['user']->name);
+		$GLOBALS['docebo_mycourses_data']=$data;
+	}
+	
+	return $data;
 }
 
 
 /**
  * Calls the Docebo API
  */
-function docebo_request($service, $params) {
+function docebo_request($service, $params, $user=false) {
 
 	$docebo_url =variable_get('docebo_url');
+	$docebo_use_ssl =variable_get('docebo_use_ssl');
 
 	if (!empty($docebo_url)) {
-		$auth =true;
-		if (!isset($_SESSION['docebo_auth_time']) || time()-$_SESSION['docebo_auth_time'] > 3600) {
-			//$auth =docebo_auth_request();
-		}	
+		$auth =doceboGetAuth($user);
 		
-		if (1 || $auth) {
+		if ($auth) {
 			$curl = curl_init();
 			
 			$defaults = array(
-				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/".$service."/&auth=drupal",
+				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/".$service."/&auth=".$auth,
 				CURLOPT_RETURNTRANSFER=>1, 
 				CURLOPT_HTTPHEADER=>array("Content-Type: multipart/form-data"),
 				CURLOPT_POST=>1,
@@ -103,17 +278,51 @@ function docebo_request($service, $params) {
 }
 
 
+function doceboGetAuth($user=false) {
+
+	$user_changed =(!empty($_SESSION['docebo_auth_user']) && $_SESSION['docebo_auth_user'] == $user ? false : true);
+
+	$auth =true;
+	if ($user_changed || !isset($_SESSION['docebo_auth_time']) || time()-$_SESSION['docebo_auth_time'] > 3600) {
+		$auth =docebo_auth_request($user);
+	}
+	else if (isset($_SESSION['docebo_auth_token'])) {
+		$auth =$_SESSION['docebo_auth_token'];
+	}
+
+	return $auth;
+}
+
+
 /**
  * Authenticate with the Docebo API
  */
-function docebo_auth_request() {
-	$docebo_url =variable_get('docebo_url');
+function docebo_auth_request($third_party = false) {
+	
+	$docebo_url =variable_get('docebo_url');	
+	$docebo_user =variable_get('docebo_user');
+	$docebo_pass =variable_get('docebo_pass');
+	$docebo_use_ssl =variable_get('docebo_use_ssl');
+	
+	$tp_query =(!empty($third_party) ? '&third_party='.$third_party : '');
+	
 	
 	$curl = curl_init();
-	curl_setopt($curl, CURLOPT_URL, $docebo_url."api/rest.php?q=/restAPI/auth/authenticate&auth=drupal");
+	curl_setopt($curl, CURLOPT_URL, $docebo_url."api/rest.php?q=/restAPI/auth/authenticate&username=".$docebo_user."&password=".$docebo_pass.$tp_query);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
 	$result = curl_exec($curl);
 	
-	return $result;
+	$xml = simplexml_load_string($result);
+	
+	if ($xml && $xml->success == 'true') {
+		$res =(string)$xml->token;
+		$_SESSION['docebo_auth_time']=time();
+		$_SESSION['docebo_auth_user']=$third_party;
+		$_SESSION['docebo_auth_token']=$res;		
+		return $res;
+	}
+	else {
+		return false;
+	}
 }
