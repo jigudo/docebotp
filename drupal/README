@@ -2,11 +2,52 @@
 DoceboLMS  (E-Learning) module for Drupal 7.x
 
 
-This module works with Drupal 7.x
 
-To use it copy the folder "docebo" inside the "modules" folder of your drupal installation and enable it from Drupal control panel. (Admin -> Modules)
+REQUIREMENTS:
+---------------------------------------------------------------------------------------
+- Drupal 7.x
+- Docebo 4.0.3 with updated files from the package
 
-Once the module is active, click on "Configure" and fill in the required parameters.
 
-In order to test it, you'll also need to grab the latest version of the Docebo API from SVN:
-svn://85.94.193.146/var/svn/docebo_35x/trunk/api
+
+FEATURES / HOW IT WORKS:
+---------------------------------------------------------------------------------------
+This module at this time provides a userbase synchronization between Drupal and Docebo where Drupal is the "Master" and Docebo is the "Slave". This means that updating or creating a user in Drupal will update or create the user in Docebo but if you create or update a user in Docebo the change won't affect the Drupal installation. In the future we plan to extend the module to have a 1:1 sync.
+
+Other features are the "my courses" block and the "Search content library" block.
+
+The first one shows a "my courses" block and page on your Drupal install with the list of courses the user is subscribed to in the LMS platform. Clicking the name of the course will bring the user inside the Course on DoceboLMS. At this time, this doesn't works with courses that uses the direct play feature.
+
+The "Search content library" block will redirect the user to the Content library module of the LMS with the content filtered according to the filled query.
+
+The module is currently in BETA version so don't consider this as a final release. At the same way, please feel free to join us to improve this module that is provided as an official Docebo module to/for the community of Drupal and Docebo; see the "join  us" chapter.
+
+
+
+INSTALL
+---------------------------------------------------------------------------------------
+On the package you can download from the website you can find the "docebo" and the "drupal" folders.
+- The "docebo" folders contains files that have to be updated in your 4.0.3 installation in order to have the module working correctly, so we suggest you to first backup your Docebo installation files and the to overwrite them with the new ones provided.
+- The "drupal" folders contains the folder "docebo" that must be placed inside the "modules" folder of your Drupal install.
+
+
+Once you've setup the files, you have to enable the Docebo module from Drupal control panel. (Admin -> Modules).
+
+Once active, you'll see the "Permissions" and "Configure" links on the Docebo module row in module management. Clicking "permissions" you'll be able to decide who can view the "My Courses" page (that it is a stand alone page with a more detailed list of user's courses, not the block itself). But, first of all, you have to configure the module by providing:
+- the main url of your docebo installation
+- the username and the password of a super-admin user of your Docebo installation used by the module to perform API calls to Docebo. This could be something like "drupal_user".
+
+Now you can eventually add blocks from Structure -> Blocks searching the page for "DoceboLMS: My courses" and "DoceboLMS: Content library" and for example setting the region to "Sidebar first".
+
+On the configuration page you'll also find the "Sync users from Drupal to Docebo" link that lets you perform a 1-way sinc to "link" Docebo accounts to Drupal accounts. This works by checking, by username, the accounts in docebo that matches the one available on your Drupal installation. When a user is found the data is stored on the Docebo database in order to "link" it with the Drupal account. In this way, updating a Drupal account will also update the Docebo account. (username and email at this time)
+
+
+
+JOIN US
+---------------------------------------------------------------------------------------
+As stated, this project is an official Docebo project, open to everyone to join. If you have enough skills to improve this module, like a good knowledge of Drupal and PHP5, you can ask us for access as a contributor to the GIT repository that hosts this project:
+
+https://github.com/docebo/docebotp/
+
+For require to be added to the repository as a contributor, or for any other question regarding the module, please post to the dedicated thread in our forum:
+http://www.docebo.org/doceboCms/forum/9_1/message/idThread_4149/Drupal_integration_[Official_module].html

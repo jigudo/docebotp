@@ -48,7 +48,7 @@ function docebo_user_update(&$edit, $account, $category) {
 	$userdata['ext_user_type']='drupal';
 	
 	$res =docebo_request('updateuser', $userdata);
-	//file_put_contents('log2.txt', var_export($res, true));
+	// file_put_contents('log2.txt', var_export($res, true).var_export($userdata, true));
 }
 
 
@@ -78,6 +78,17 @@ function docebo_menu() {
 		'title' => 'Docebo',
 		'description' => '',
 		'page callback' => 'docebo_admin_display',
+		//'page arguments' => array($default_theme),
+		'access arguments' => array('administer'),
+		'file' => 'docebo.admin.inc',
+	);
+	
+	
+	$items['admin/config/system/docebo_users'] = array(
+		'title' => 'Docebo users',
+		'description' => '',
+		'type'=>MENU_CALLBACK,
+		'page callback' => 'docebo_users_admin_display',
 		//'page arguments' => array($default_theme),
 		'access arguments' => array('administer'),
 		'file' => 'docebo.admin.inc',
@@ -156,19 +167,23 @@ function docebo_block_view($delta = '') {
 
 function docebo_block_mycourses() {
 	$res ='';
+	
+	if (empty($GLOBALS['user']->uid)) { return $res; }
 
 	$data =docebo_get_mycourses_data();
-	$xml =new SimpleXMLElement($data);
-	$nodes =$xml->xpath('//course_info');
-	$auth =doceboGetAuth(doceboGetDrupalUsername());
-	
-	$li_arr =array();
-	foreach($nodes as $item) {
-		$li_arr[]='<li><a href="'.$item->course_link.'&amp;auth='.$auth.'">'.$item->course_name.'</a></li>';
-	}
-	
-	if (!empty($li_arr)) {
-		$res ='<ul class="menu">'.implode("\n", $li_arr).'</ul>';
+	if ($data) {
+		$xml =new SimpleXMLElement($data);
+		$nodes =$xml->xpath('//course_info');
+		$auth =doceboGetAuth(doceboGetDrupalUsername());
+		
+		$li_arr =array();
+		foreach($nodes as $item) {
+			$li_arr[]='<li><a href="'.$item->course_link.'&amp;auth='.$auth.'">'.$item->course_name.'</a></li>';
+		}
+		
+		if (!empty($li_arr)) {
+			$res ='<ul class="menu">'.implode("\n", $li_arr).'</ul>';
+		}
 	}
 
 	return $res;
@@ -177,6 +192,8 @@ function docebo_block_mycourses() {
 
 function docebo_block_kb() {
 	$res ='';
+	
+	if (empty($GLOBALS['user']->uid)) { return $res; }
 
 	$res.='<div class="container-inline">
 		<div class="form-item form-type-textfield form-item-search-block-form">';
@@ -210,6 +227,10 @@ function kb_search_box($form, &$form_state) {
 	$form['auth'] = array(
 		'#type' => 'hidden',
 		'#value' => doceboGetAuth(doceboGetDrupalUsername()),
+	);
+	$form['sop'] = array(
+		'#type' => 'hidden',
+		'#value' => 'unregistercourse',
 	);
 	$form['actions'] = array('#type' => 'actions');
 	$form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
@@ -267,7 +288,7 @@ function docebo_request($service, $params, $user=false) {
 		if ($auth) {
 			$curl = curl_init();
 			
-			$defaults = array(
+			$opt = array(
 				CURLOPT_URL=>$docebo_url."api/rest.php?q=/restAPI/user/".$service."/&auth=".$auth,
 				CURLOPT_RETURNTRANSFER=>1, 
 				CURLOPT_HTTPHEADER=>array("Content-Type: multipart/form-data"),
@@ -275,7 +296,12 @@ function docebo_request($service, $params, $user=false) {
 				CURLOPT_POSTFIELDS=>$params,
 			); 
 			
-			curl_setopt_array($curl, $defaults);
+			if ($docebo_use_ssl) {
+				$opt[CURLOPT_SSL_VERIFYPEER]=FALSE;
+				$opt[CURLOPT_SSL_VERIFYHOST]=2;
+			}
+			
+			curl_setopt_array($curl, $opt);
 			
 			$result = curl_exec($curl);
 		}
@@ -321,6 +347,10 @@ function docebo_auth_request($third_party = false) {
 	curl_setopt($curl, CURLOPT_URL, $docebo_url."api/rest.php?q=/restAPI/auth/authenticate&username=".$docebo_user."&password=".$docebo_pass.$tp_query);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
+	if ($docebo_use_ssl) {
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,  2);
+	}
 	$result = curl_exec($curl);
 	
 	$xml = simplexml_load_string($result);
