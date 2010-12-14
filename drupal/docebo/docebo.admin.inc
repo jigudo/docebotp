@@ -119,7 +119,7 @@ function docebo_users_admin_display() {
 		drupal_set_message(t('Drupal users has been synchronized with the ones matching in Docebo.', array()));
 	}
 
-	$result.='<p>intro text..</p>';  
+	$result.='<p>You can synchronize your Docebo users with the one from you Drupal installation. Clicking "Sync users from Drupal to Docebo" will "link" the accounts in Drupal with the correspoinding ones (having the same username) in your Docebo installation.</p>';  
 	
 	$result.=drupal_render(drupal_get_form('docebo_users_admin_form'), true);  //echo $result;  die();
 	
