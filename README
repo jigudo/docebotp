@@ -1,3 +1,5 @@
+INTRODUCTION:
+---------------------------------------------------------------------------------------
 This modules are a bridge between DoceboLMS and other platforms like Drupal, Joomla, SugarCRM, ...
 
 The main features that this modules will provide once finished are:
@@ -9,3 +11,12 @@ The main features that this modules will provide once finished are:
 
 This project is considered "official" but at the same time "external" to Docebo so this means that anyone who can help us in developing it and/or keeping it up-to-date will be able to join and get the opportunity to directly commit updates to the project git repository.
 If you are skilled with one of the cms/crm platforms mentioned above, and you wish to contribute, feel free to contact us!
+
+
+
+FOLDERS DESCRIPTION:
+---------------------------------------------------------------------------------------
+- docebo: contains files needed in order to run the modules on the 4.0.3 version of docebo
+- drupal: contains the drupal module files; please see the README inside this folder for install instructions
+- joomla: will contain the joomla module files; please see the README inside this folder for install instructions
+- sugarcrm: will contain the sugarcrm module files; please see the README inside this folder for install instructions
