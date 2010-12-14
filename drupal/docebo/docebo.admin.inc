@@ -112,7 +112,7 @@ function docebo_users_admin_display() {
 
 		if (!empty($userdata)) {
 			$req_res =docebo_request('importextusers', $userdata);
-			file_put_contents('log3.txt', var_export($req_res, true));
+			// file_put_contents('log3.txt', var_export($req_res, true));
 		}
 		
 		watchdog('docebo', 'Drupal users has been synchronized with the ones matching in Docebo.', array(), WATCHDOG_NOTICE, l(t('view'), 'admin/config/system/docebo_users'));

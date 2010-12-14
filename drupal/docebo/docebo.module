@@ -267,6 +267,7 @@ function docebo_get_mycourses_data() {
 	}
 	else {
 		$data =docebo_request('mycourses', $userdata, doceboGetDrupalUsername());
+		// file_put_contents('log2.txt', var_export($data, true));
 		$GLOBALS['docebo_mycourses_data']=$data;
 	}
 	
