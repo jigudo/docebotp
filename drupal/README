@@ -26,9 +26,9 @@ The module is currently in BETA version so don't consider this as a final releas
 
 INSTALL
 ---------------------------------------------------------------------------------------
-On the package you can download from the website you can find the "docebo" and the "drupal" folders.
-- The "docebo" folders contains files that have to be updated in your 4.0.3 installation in order to have the module working correctly, so we suggest you to first backup your Docebo installation files and the to overwrite them with the new ones provided.
-- The "drupal" folders contains the folder "docebo" that must be placed inside the "modules" folder of your Drupal install.
+On the package you can download from the website you can find the "docebo" and the "docebo_patch_403" folders.
+- The "docebo_patch_403" folder contains files that have to be updated in your 4.0.3 installation in order to have the module working correctly, so we suggest you to first backup your Docebo installation files and the to overwrite them with the new ones provided.
+- The "docebo" folder is the folder that must be placed inside the "modules" folder of your Drupal install.
 
 
 Once you've setup the files, you have to enable the Docebo module from Drupal control panel. (Admin -> Modules).
