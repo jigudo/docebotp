@@ -1,0 +1,118 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  docebo.admin.inc: n/a
+#  docebo.mycourses.inc: n/a
+#  docebo.module: n/a
+#  docebo.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Docebo module 0.1\n"
+"POT-Creation-Date: 2010-12-17 16:32+0100\n"
+"PO-Revision-Date: 2010-12-17 16:35+0100\n"
+"Last-Translator: Giovanni Derks <giovanni.derks@docebo.com>\n"
+"Language-Team: docebo.org\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: plural=EXPRESSION;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: docebo.admin.inc:26
+msgid "Docebo Url"
+msgstr "Url installazione Docebo"
+
+#: docebo.admin.inc:33
+msgid "Docebo user (sso)"
+msgstr "Utente docebo (sso)"
+
+#: docebo.admin.inc:40
+msgid "Docebo user password (sso)"
+msgstr "Password utente Docebo (sso)"
+
+#: docebo.admin.inc:47
+msgid "Use SSL"
+msgstr "Usa SSL"
+
+#: docebo.admin.inc:54;143
+msgid "Sync users from Drupal to Docebo"
+msgstr "Sincronizza utenti da Drupal a Docebo"
+
+#: docebo.admin.inc:61
+msgid "Save"
+msgstr "Salva"
+
+#: docebo.admin.inc:83;118
+msgid "view"
+msgstr "visualizza"
+
+#: docebo.admin.inc:84;83
+msgid "Settings saved."
+msgstr "Impostazioni salvate."
+
+#: docebo.admin.inc:119;118
+msgid "Drupal users has been synchronized with the ones matching in Docebo."
+msgstr "Gli utenti di Drupal sono stati sincronizzati con i corrispondenti in Docebo."
+
+#: docebo.admin.inc:122
+msgid "You can synchronize your Docebo users with the one from you Drupal installation. Clicking \"Sync users from Drupal to Docebo\" will \"link\" the accounts in Drupal with the correspoinding ones (having the same username) in your Docebo installation."
+msgstr "Puoi sincronizzare gli utenti Docebo partendo da quelli nella tua installazione di Drupal. Cliccando \"Sincronizza utenti da Drupal a Docebo\" gli account verranno \"collegati\" in Drupal con i corrispettivi (quelli aventi lo stesso username) trovati nella tua installazione Docebo."
+
+#: docebo.admin.inc:83;118
+msgid "docebo"
+msgstr ""
+
+#: docebo.mycourses.inc:31
+msgid "Enter course"
+msgstr "Vai al corso"
+
+#: docebo.module:121
+msgid "Access to the user's subscribed course list"
+msgstr "Accesso alla lista dei corsi a cui l'utente è iscritto"
+
+#: docebo.module:135
+msgid "DoceboLMS: My courses"
+msgstr "DoceboLMS: I miei corsi"
+
+#: docebo.module:139
+msgid "DoceboLMS: Content library"
+msgstr "DoceboLMS: Libreria contenuti"
+
+#: docebo.module:156;98
+msgid "LMS: My courses"
+msgstr "LMS: I miei corsi"
+
+#: docebo.module:160
+msgid "LMS: Search content library"
+msgstr "LMS: Cerca nella libreria contenuti"
+
+#: docebo.module:217;236
+msgid "Search"
+msgstr "Cerca"
+
+#: docebo.module:221
+msgid "Enter the terms you wish to search for."
+msgstr "Inserisci i termini che vuoi cercare."
+
+#: docebo.module:78
+#: docebo.info:0
+msgid "Docebo"
+msgstr ""
+
+#: docebo.module:88
+msgid "Docebo users"
+msgstr "Utenti Docebo"
+
+#: docebo.info:0
+msgid "Docebo module"
+msgstr "Modulo Docebo"
+
+#: docebo.info:0
+msgid "Core"
+msgstr ""
+

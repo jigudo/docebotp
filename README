@@ -16,7 +16,7 @@ If you are skilled with one of the cms/crm platforms mentioned above, and you wi
 
 FOLDERS DESCRIPTION:
 ---------------------------------------------------------------------------------------
-- docebo_patch_403: contains files needed in order to run the modules on the 4.0.3 version of docebo (not needed on newest installations)
+- patch_for_docebo_403: contains files needed in order to run the modules on the 4.0.3 version of docebo (not needed on newest installations)
 - drupal: contains the drupal module files; please see the README inside this folder for install instructions
 - joomla: will contain the joomla module files; please see the README inside this folder for install instructions
 - sugarcrm: will contain the sugarcrm module files; please see the README inside this folder for install instructions
