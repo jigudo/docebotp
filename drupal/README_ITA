@@ -1,4 +1,4 @@
-
+Ôªø
 Modulo DoceboLMS (E-Learning) per Drupal 7.x
 
 
@@ -12,15 +12,15 @@ REQUISITI:
 
 CARATTERISTICHE / COME FUNZIONA:
 ---------------------------------------------------------------------------------------
-Questo modulo fornisce, al momento, la sincronizzazione della base utenti tra Drupal e Docebo in un ambiente in cui Drupal Ë considerato il "Master" e Docebo lo "slave". Questo vuol dire che aggiornando o creando un utente in Drupal, questo verr‡ aggiornato o creato in Docebo ma non vice-versa. In futuro prevediamo di estendere il modulo per avere una sincronizzazione 1:1.
+Questo modulo fornisce, al momento, la sincronizzazione della base utenti tra Drupal e Docebo in un ambiente in cui Drupal √® considerato il "Master" e Docebo lo "slave". Questo vuol dire che aggiornando o creando un utente in Drupal, questo verr√† aggiornato o creato in Docebo ma non vice-versa. In futuro prevediamo di estendere il modulo per avere una sincronizzazione 1:1.
 
 Il modulo fornisce inoltre il blocco "miei corsi" e il blocco "cerca nella libreria contenuti".
 
-Il primo mostra un blocco e una pagina dei "miei corsi" nella tua installazione di Drupal, con la lista dei corsi a cui l'utente Ë iscritto nell'LMS. Cliccando il nome del corso porter‡ l'utente dentro al corso in DoceboLMS. Al momento questo blocco non prevede l'esecuzione diretta del primo oggetto del corso.
+Il primo mostra un blocco e una pagina dei "miei corsi" nella tua installazione di Drupal, con la lista dei corsi a cui l'utente √® iscritto nell'LMS. Cliccando il nome del corso porter√† l'utente dentro al corso in DoceboLMS. Al momento questo blocco non prevede l'esecuzione diretta del primo oggetto del corso.
 
-Il blocco "cerca nella libreria contenuti" reinderizzer‡ l'utente al modulo libreria contenuti dell'LMS filtrando il contenuto in base ai termini di ricerca inseriti.
+Il blocco "cerca nella libreria contenuti" reinderizzer√† l'utente al modulo libreria contenuti dell'LMS filtrando il contenuto in base ai termini di ricerca inseriti.
 
-Il modulo Ë attualmente in versione BETA, quindi non va considerato come una release finale/completa. Inoltre, siete invitati ad unirvi a noi per migliorare questo modulo che viene rilasciato come un modulo ufficiale Docebo alle/per le community di Drupal e Docebo; per maggiori informazioni vedere il paragrafo "unisciti a noi".
+Il modulo √® attualmente in versione BETA, quindi non va considerato come una release finale/completa. Inoltre, siete invitati ad unirvi a noi per migliorare questo modulo che viene rilasciato come un modulo ufficiale Docebo alle/per le community di Drupal e Docebo; per maggiori informazioni vedere il paragrafo "unisciti a noi".
 
 
 
@@ -28,24 +28,24 @@ INSTALLAZIONE
 ---------------------------------------------------------------------------------------
 Nel pacchetto scaricabile dal sito troverai le cartelle "docebo" e "patch_for_docebo_403".
 - La cartella "patch_for_docebo_403" contiene i file che devono essere aggiornati nell'installazione di Docebo 4.0.3 per far funzionare correttamente il modulo. Suggeriamo quindi di effettuare un backup dei file della tua installazione Docebo per poi procedere a sovrascrivere i nuovi file con quelli forniti.
-- La cartella "docebo" Ë la cartella che deve essere messa dentro la cartella "modules" della tua installazione di Drupal.
+- La cartella "docebo" √® la cartella che deve essere messa dentro la cartella "modules" della tua installazione di Drupal.
 
 
-Una volta caricati i file, Ë necessario abilitare il modulo Docebo per Drupal dal pannello di amministrazione di Drupal. (Admin -> Modules).
+Una volta caricati i file, √® necessario abilitare il modulo Docebo per Drupal dal pannello di amministrazione di Drupal. (Admin -> Modules).
 
-Una volta attivo, compriranno i link "Permissions" e "Configure" nella riga corrispondente al modulo Docebo nella gestione moduli. Cliccando su "permissions" sar‡ possibile decidere chi puÚ vedere la pagina "Miei corsi" (una pagina dedicata, con un elenco pi˘ dettagliato della lista dei corsi dell'utente). Ma, prima di tutto, Ë necessario configurare il modulo fornendo:
+Una volta attivo, compriranno i link "Permissions" e "Configure" nella riga corrispondente al modulo Docebo nella gestione moduli. Cliccando su "permissions" sar√† possibile decidere chi pu√≤ vedere la pagina "Miei corsi" (una pagina dedicata, con un elenco pi√π dettagliato della lista dei corsi dell'utente). Ma, prima di tutto, √® necessario configurare il modulo fornendo:
 - l'url principale della tua installazione docebo
-- il nome utente e la password di un utente di livello super-admin presente nella tua installazione Docebo, che verr‡ usato dal modulo per eseguire le chiamate API a Docebo. L'utente potrebbe ad esempio chiamarsi "drupal_user".
+- il nome utente e la password di un utente di livello super-admin presente nella tua installazione Docebo, che verr√† usato dal modulo per eseguire le chiamate API a Docebo. L'utente potrebbe ad esempio chiamarsi "drupal_user".
 
-Ora volendo Ë possibile aggiungere dei blocchi andando su Structure -> Blocks e cercando i moduli contententi "DoceboLMS" nel nome ed impostando quindi la regione in cui posizionarli, ad esempio "Sidebar first".
+Ora volendo √® possibile aggiungere dei blocchi andando su Structure -> Blocks e cercando i moduli contententi "DoceboLMS" nel nome ed impostando quindi la regione in cui posizionarli, ad esempio "Sidebar first".
 
-Nella schermata di configurazione del modulo, troverete anche la voce "Sincronizza gli utenti da Drupal a Docebo" che permette di effettuare una sincronizzazione unidirezzionale degli account utente da Drupal verso Docebo. Questo procedimento funziona controllando gli account che hanno gli stessi username su entrambe le piattaforme. Quando un account viene trovato in Docebo, esso viene "collegato" con il relativo account Drupal. In questo modo, aggiornando un account in Drupal risulter‡ nell'avere le informazioni utente aggiornate anche in Docebo. (nome utente ed email al momento)
+Nella schermata di configurazione del modulo, troverete anche la voce "Sincronizza gli utenti da Drupal a Docebo" che permette di effettuare una sincronizzazione unidirezzionale degli account utente da Drupal verso Docebo. Questo procedimento funziona controllando gli account che hanno gli stessi username su entrambe le piattaforme. Quando un account viene trovato in Docebo, esso viene "collegato" con il relativo account Drupal. In questo modo, aggiornando un account in Drupal risulter√† nell'avere le informazioni utente aggiornate anche in Docebo. (nome utente ed email al momento)
 
 
 
 UNISCITI A NOI
 ---------------------------------------------------------------------------------------
-Come menzionato, questo Ë un progetto ufficiale di Docebo, aperto a tutti coloro vogliano contribuire. Se hai le capacit‡ per migliorare questo modulo, come una buona conoscenza di Drupal e PHP5, puoi richiederci l'accesso in scrittura al repository GIT che ospita questo progetto:
+Come menzionato, questo √® un progetto ufficiale di Docebo, aperto a tutti coloro vogliano contribuire. Se hai le capacit√† per migliorare questo modulo, come una buona conoscenza di Drupal e PHP5, puoi richiederci l'accesso in scrittura al repository GIT che ospita questo progetto:
 
 https://github.com/docebo/docebotp/
 
