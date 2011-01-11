@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-12-17 16:11+0100\n"
+"POT-Creation-Date: 2010-12-17 16:32+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -55,6 +55,10 @@ msgstr ""
 
 #: docebo.admin.inc:119;118
 msgid "Drupal users has been synchronized with the ones matching in Docebo."
+msgstr ""
+
+#: docebo.admin.inc:122
+msgid "You can synchronize your Docebo users with the one from you Drupal installation. Clicking \"Sync users from Drupal to Docebo\" will \"link\" the accounts in Drupal with the correspoinding ones (having the same username) in your Docebo installation."
 msgstr ""
 
 #: docebo.admin.inc:83;118
