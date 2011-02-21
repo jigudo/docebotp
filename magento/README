@@ -1,0 +1,54 @@
+﻿
+DoceboLMS  (E-Learning) module for Magento
+
+
+
+REQUIREMENTS:
+---------------------------------------------------------------------------------------
+- Magento 1.4.x
+- Docebo 4.0.4 with updated files from the package
+
+
+
+FEATURES / HOW IT WORKS:
+---------------------------------------------------------------------------------------
+This module at this time provides a userbase synchronization between Magento and Docebo where Magento is the "Master" and Docebo is the "Slave". This means that updating or creating a user in Magento will update or create the user in Docebo but if you create or update a user in Docebo the change won't affect the Magento installation.
+The module allows users to buy a virtual product in your Magento installation that can be linked with a Docebo LMS course. When the order is completed the courses bought by the users in Magento will automatically be activated for the user in Docebo LMS. Note that at this time it works only with regular e-learning courses (no editions / no classrooms).
+
+The module is currently in BETA version so don't consider this as a final release. At the same way, please feel free to join us to improve this module that is provided as an official Docebo module to/for the community of Magento and Docebo; see the "join  us" chapter.
+
+
+
+INSTALL
+---------------------------------------------------------------------------------------
+On the package you can download from the website you can find the "Docebo" and the "patch_for_Docebo_404" folders.
+- The "patch_for_Docebo_404" folder contains files that have to be updated in your 4.0.4 installation in order to have the module working correctly, so we suggest you to first backup your Docebo installation files and the to overwrite them with the new ones provided.
+- The "Docebo" folder is the folder that must be placed inside the "app/code/local" folder of your Magento install.
+
+
+Once you've setup the files, you have to configure the module by going in administration > system > configuration and selecting Web > Docebo.
+Here you have to setup the url of your Docebo installation (ending with "/") and the user and password of a super-admin user that will be used to authenticate to the Docebo API.
+
+
+On the administration page, selecting Docebo -> Users from the menu, you'll also find the "Sync users from Magento to Docebo" link that lets you perform a 1-way sinc to "link" Docebo accounts to Magento accounts. This works by checking, by e-mail address, the accounts in Docebo that matches the one available on your Magento installation. When a user is found the data is stored on the Docebo database in order to "link" it with the Magento account. In this way, updating a Magento account will also update the Docebo account. (username and email at this time)
+
+
+
+CREATING A PRODUCT
+---------------------------------------------------------------------------------------
+You can create a product and link it to a Docebo course by creating a course as you normally would; create it as a Virtual Product and remember to select a category and set inventory settings as following:
+- Manage Stock: No
+- Maximum Qty Allowed in Shopping Cart: 1
+
+On the "General" tab you'll find the DoceboLMS Course dropdown menu that will allow you to select a Docebo LMS course to associate your product with. Selecting a course will "link" the product with the course.
+
+
+
+JOIN US
+---------------------------------------------------------------------------------------
+As stated, this project is an official Docebo project, open to everyone to join. If you have enough skills to improve this module, like a good knowledge of Magento and PHP5, you can ask us for access as a contributor to the GIT repository that hosts this project:
+
+https://github.com/Docebo/Docebotp/
+
+In order to be added to the repository as a contributor, or for any other question regarding the module, please post to the dedicated thread in our forum:
+http://www.Docebo.org/DoceboCms/forum/9_1/message/idThread_4149/Magento_integration_[Official_module].html
