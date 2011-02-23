@@ -1,0 +1,53 @@
+﻿
+Modulo DoceboLMS (E-Learning) per Magento
+
+
+
+REQUISITI:
+---------------------------------------------------------------------------------------
+- Magento 1.4.x
+- Docebo 4.0.4 con i file aggiornati, disponibili nel pacchetto del modulo
+
+
+
+CARATTERISTICHE / COME FUNZIONA:
+---------------------------------------------------------------------------------------
+Questo modulo fornisce, al momento, la sincronizzazione della base utenti tra Magento e Docebo in un ambiente in cui Magento è considerato il "Master" e Docebo lo "slave". Questo vuol dire che aggiornando o creando un utente in Magento, questo verrà aggiornato o creato in Docebo ma non vice-versa.
+Il modulo permette di avere dei prodotti virtuali in Magento collegati con dei relativi corsi in Docebo. Acquistando il prodotto in Magento il relativo corso verrà automaticamente abilitato per l'utente in Docebo LMS nel momento in cui l'ordine sarà completato. Al momento funziona solamente con i corsi normali (no edizioni / corsi d'aula).
+
+Il modulo è attualmente in versione BETA, quindi non va considerato come una release finale/completa. Inoltre, siete invitati ad unirvi a noi per migliorare questo modulo che viene rilasciato come un modulo ufficiale Docebo alle/per le community di Magento e Docebo; per maggiori informazioni vedere il paragrafo "unisciti a noi".
+
+
+
+INSTALLAZIONE
+---------------------------------------------------------------------------------------
+Nel pacchetto scaricabile dal sito troverai le cartelle "Docebo" e "patch_for_docebo_404".
+- La cartella "patch_for_docebo_404" contiene i file che devono essere aggiornati nell'installazione di Docebo 4.0.4 per far funzionare correttamente il modulo. Suggeriamo quindi di effettuare un backup dei file della tua installazione Docebo per poi procedere a sovrascrivere i nuovi file con quelli forniti.
+- La cartella "Docebo" è la cartella che deve essere messa dentro la cartella "app/code/local" della tua installazione di Magento.
+
+
+Una volta caricati i file, è necessario configurare il modulo andando in amministrazione > system > configuration e selezionando Web > Docebo.
+In questa schermata vanno impostati l'url della tua installazione Docebo (con alla fine "/") e il nome utente e la password di un utente super-amministratore usato per effettuare l'autenticazione con le API Docebo.
+
+Sempre dall'amministrazione, selezionando Docebo -> Users dal menù, sarà possibile trovare il pulsante "Sync users from Magento to Docebo" che esegue una sincronizzazione monodirezionale "collegando" gli account Docebo con quelli presenti in Magento. La procedura funziona controllando, basandosi sull'indirizzo e-mail, gli account in Docebo che corrispondono con quelli disponibili in Magento. Quando un utente viene trovato, l'informazione è memorizzata nel database di Docebo in modo da collegarlo con l'account di Magento. In questo modo, aggiornando un account in Magento, i dati principali verranno riportati anche nell'account Docebo. Una volta abilitato e configurato il modulo, i nuovi utenti creati in Magento verranno automaticamente creati e "collegati" anche in Docebo.
+
+
+
+CREARE UN PRODOTTO
+---------------------------------------------------------------------------------------
+Puoi creare un prodotto e collegarlo con un corso presente in Docebo creando un prodotto in Magento come faresti normalmente; crealo come "Virtual Product" e ricordati di selezionare una categoria e di impostare le opzioni d'inventario come segue:
+- Manage Stock: No
+- Maximum Qty Allowed in Shopping Cart: 1
+
+Nella scheda "General" troverai il menù a tendina "DoceboLMS Course" che ti permetterà di selezionare un corso di Docebo LMS da associare al tuo prodotto. Selezionando un corso "collegherà" quest'ultimo con il tuo prodotto.
+
+
+
+UNISCITI A NOI
+---------------------------------------------------------------------------------------
+Come menzionato, questo è un progetto ufficiale di Docebo, aperto a tutti coloro vogliano contribuire. Se hai le capacità per migliorare questo modulo, come una buona conoscenza di Magento e PHP5, puoi richiederci l'accesso in scrittura al repository GIT che ospita questo progetto:
+
+https://github.com/docebo/docebotp/
+
+Per chiedere di essere aggiunto come collaboratore al progetto, o per qualsiasi altra richiesta riguardante il modulo, invitiamo a rispondere alla discussione ufficiale nel nostro forum (in inglese):
+http://www.docebo.org/forum/10_2/message/idThread_5889/Magento_commerce_integration.html

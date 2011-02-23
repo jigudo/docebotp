@@ -30,17 +30,17 @@ Once you've setup the files, you have to configure the module by going in admini
 Here you have to setup the url of your Docebo installation (ending with "/") and the user and password of a super-admin user that will be used to authenticate to the Docebo API.
 
 
-On the administration page, selecting Docebo -> Users from the menu, you'll also find the "Sync users from Magento to Docebo" link that lets you perform a 1-way sinc to "link" Docebo accounts to Magento accounts. This works by checking, by e-mail address, the accounts in Docebo that matches the one available on your Magento installation. When a user is found the data is stored on the Docebo database in order to "link" it with the Magento account. In this way, updating a Magento account will also update the Docebo account. (username and email at this time)
+On the administration page, selecting Docebo -> Users from the menu, you'll also find the "Sync users from Magento to Docebo" link that lets you perform a 1-way sinc to "link" Docebo accounts to Magento accounts. This works by checking, by e-mail address, the accounts in Docebo that matches the one available on your Magento installation. When a user is found the data is stored on the Docebo database in order to "link" it with the Magento account. In this way, updating a Magento account will also update the Docebo account. Once you've setup and configured the module, new Magento users will automatically be added and "linked" to your Docebo installation.
 
 
 
 CREATING A PRODUCT
 ---------------------------------------------------------------------------------------
-You can create a product and link it to a Docebo course by creating a course as you normally would; create it as a Virtual Product and remember to select a category and set inventory settings as following:
+You can create a product and link it to a Docebo course by creating a Magento product as you normally would; create it as a Virtual Product and remember to select a category and set inventory settings as following:
 - Manage Stock: No
 - Maximum Qty Allowed in Shopping Cart: 1
 
-On the "General" tab you'll find the DoceboLMS Course dropdown menu that will allow you to select a Docebo LMS course to associate your product with. Selecting a course will "link" the product with the course.
+On the "General" tab you'll find the "DoceboLMS Course" dropdown menu that will allow you to select a Docebo LMS course to associate your product with. Selecting a course will "link" the product with the course.
 
 
 
@@ -48,7 +48,7 @@ JOIN US
 ---------------------------------------------------------------------------------------
 As stated, this project is an official Docebo project, open to everyone to join. If you have enough skills to improve this module, like a good knowledge of Magento and PHP5, you can ask us for access as a contributor to the GIT repository that hosts this project:
 
-https://github.com/Docebo/Docebotp/
+https://github.com/docebo/docebotp/
 
 In order to be added to the repository as a contributor, or for any other question regarding the module, please post to the dedicated thread in our forum:
-http://www.Docebo.org/DoceboCms/forum/9_1/message/idThread_4149/Magento_integration_[Official_module].html
+http://www.docebo.org/doceboCms/forum/10_2/message/idThread_5889/Magento_commerce_integration.html
