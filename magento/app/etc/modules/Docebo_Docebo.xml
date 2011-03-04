@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Docebo_Docebo>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Docebo_Docebo>
+    </modules>
+</config> 

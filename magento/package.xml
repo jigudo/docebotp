@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>DoceboLMS_Elearning_Integration</name>
+ <channel>connect.magentocommerce.com/community</channel>
+ <summary>This module allow to sell online e-learning courses delivered with DoceboLMS using Magento as E-Commerce platform</summary>
+ <description>This module at this time provides a userbase synchronization between Magento and Docebo where Magento is the &quot;Master&quot; and Docebo is the &quot;Slave&quot;. This means that updating or creating a user in Magento will update or create the user in Docebo but if you create or update a user in Docebo the change won&apos;t affect the Magento installation.
+The module allows users to buy a virtual product in your Magento installation that can be linked with a Docebo LMS course. When the order is completed the courses bought by the users in Magento will automatically be activated for the user in Docebo LMS.</description>
+ <lead>
+  <name>Docebo Staff</name>
+  <user>docebo</user>
+  <email>info@docebo.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-03-04</date>
+ <time>09:14:44</time>
+ <version>
+  <release>0.1.2</release>
+  <api>4.0.5</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License v2</license>
+ <notes>Please see our wiki for more information: http://www.docebo.org/doceboCms/wiki/129_327/show/english/0/Magento</notes>
+ <contents>
+  <dir name="/">
+   <dir name="Docebo">
+    <dir name="Docebo">
+     <dir name="Block">
+      <dir name="Adminhtml">
+       <dir name="Docebo">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="bea595232f85e21bc2f6159f075c598c" name="Form.php" role="magelocal" />
+         </dir> <!-- /Docebo/Docebo/Block/Adminhtml/Docebo/Edit/Tab -->
+         <file md5sum="1234a400c1948ff2afc6ad8aecb76c79" name="Form.php" role="magelocal" />
+         <file md5sum="d41d8cd98f00b204e9800998ecf8427e" name="Tabs.php" role="magelocal" />
+        </dir> <!-- /Docebo/Docebo/Block/Adminhtml/Docebo/Edit -->
+        <file md5sum="d67fbc55a2cad295f0dfd636f00aa63c" name="Edit.php" role="magelocal" />
+        <file md5sum="0f90a856a46a12d2f25020e18ebda12e" name="Grid.php" role="magelocal" />
+       </dir> <!-- /Docebo/Docebo/Block/Adminhtml/Docebo -->
+       <file md5sum="80f92052eabf70e919c82f722075e18a" name="Docebo.php" role="magelocal" />
+      </dir> <!-- /Docebo/Docebo/Block/Adminhtml -->
+      <file md5sum="e79e235fea02a706cb360979dc816c31" name="Docebo.php" role="magelocal" />
+     </dir> <!-- /Docebo/Docebo/Block -->
+     <dir name="controllers">
+      <dir name="Adminhtml">
+       <file md5sum="b22d8e890e776c1ea2c356096864b178" name="DoceboController.php" role="magelocal" />
+      </dir> <!-- /Docebo/Docebo/controllers/Adminhtml -->
+      <file md5sum="08cfc79af800afa4106f6a5536cb3588" name="IndexController.php" role="magelocal" />
+     </dir> <!-- /Docebo/Docebo/controllers -->
+     <dir name="etc">
+      <file md5sum="075e37d0e8040ad6bb71ec6a213820ed" name="config.xml" role="magelocal" />
+      <file md5sum="730b7fa0d1ebca9b409885f1503650b5" name="system.xml" role="magelocal" />
+     </dir> <!-- /Docebo/Docebo/etc -->
+     <dir name="Helper">
+      <file md5sum="e66f99e84c3399ef1760379210c95e10" name="Data.php" role="magelocal" />
+      <file md5sum="101a4ba5dedbdc8ef17c9bd20802ed0a" name="DoceboRequest.php" role="magelocal" />
+     </dir> <!-- /Docebo/Docebo/Helper -->
+     <dir name="Model">
+      <dir name="Mysql4">
+       <dir name="Docebo">
+        <file md5sum="9b948fc5a13bd837359819a5ae56fda7" name="Collection.php" role="magelocal" />
+       </dir> <!-- /Docebo/Docebo/Model/Mysql4/Docebo -->
+       <file md5sum="0f310c5db11932beca37bab28aa218af" name="Docebo.php" role="magelocal" />
+      </dir> <!-- /Docebo/Docebo/Model/Mysql4 -->
+      <dir name="Observer">
+       <file md5sum="cc5c66b98d5a16b15790268a5297180e" name="Login.php" role="magelocal" />
+       <file md5sum="5a569a39e19c99e668fdf87e0f3bf375" name="Main.php" role="magelocal" />
+      </dir> <!-- /Docebo/Docebo/Model/Observer -->
+      <dir name="Product">
+       <dir name="Attribute">
+        <dir name="Source">
+         <file md5sum="171a049af21185f517e410fc33d3760b" name="Unit.php" role="magelocal" />
+        </dir> <!-- /Docebo/Docebo/Model/Product/Attribute/Source -->
+       </dir> <!-- /Docebo/Docebo/Model/Product/Attribute -->
+      </dir> <!-- /Docebo/Docebo/Model/Product -->
+      <dir name="Resource">
+       <dir name="Eav">
+        <dir name="Mysql4">
+         <file md5sum="663bc65d1bb49d0977ec3b45b8339d3a" name="Setup.php" role="magelocal" />
+        </dir> <!-- /Docebo/Docebo/Model/Resource/Eav/Mysql4 -->
+       </dir> <!-- /Docebo/Docebo/Model/Resource/Eav -->
+      </dir> <!-- /Docebo/Docebo/Model/Resource -->
+      <file md5sum="04898562112d8f6f0a0e09e1a84113a2" name="Docebo.php" role="magelocal" />
+      <file md5sum="cf580c763d48957e3e688fe33e86f93a" name="Status.php" role="magelocal" />
+     </dir> <!-- /Docebo/Docebo/Model -->
+     <dir name="sql">
+      <dir name="docebo_setup">
+       <file md5sum="6926c9fa378e309da4ceb135c6493623" name="mysql4-install-0.1.0.php" role="magelocal" />
+      </dir> <!-- /Docebo/Docebo/sql/docebo_setup -->
+     </dir> <!-- /Docebo/Docebo/sql -->
+    </dir> <!-- /Docebo/Docebo -->
+   </dir> <!-- /Docebo -->
+   <dir name="modules">
+    <file md5sum="43157db2af6b2f58fafa895ea0bdc92f" name="Docebo_Docebo.xml" role="mageetc" />
+   </dir> <!-- /modules -->
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.1</min>
+    <max>6.0.0</max>
+    <exclude>6.0.0</exclude>
+   </php>
+   <pearinstaller>
+    <min>1.6.2</min>
+   </pearinstaller>
+   <extension>
+    <name>curl</name>
+   </extension>
+  </required>
+ </dependencies>
+ <phprelease />
+</package>

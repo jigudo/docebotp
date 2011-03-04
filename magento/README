@@ -23,7 +23,7 @@ INSTALL
 ---------------------------------------------------------------------------------------
 On the package you can download from the website you can find the "Docebo" and the "patch_for_Docebo_404" folders.
 - The "patch_for_Docebo_404" folder contains files that have to be updated in your 4.0.4 installation in order to have the module working correctly, so we suggest you to first backup your Docebo installation files and the to overwrite them with the new ones provided.
-- The "Docebo" folder is the folder that must be placed inside the "app/code/local" folder of your Magento install.
+- The "magento" folder contains the "app" folder that is the folder that must be placed inside the root folder of your Magento install.
 
 
 Once you've setup the files, you have to configure the module by going in administration > system > configuration and selecting Web > Docebo.

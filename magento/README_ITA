@@ -23,7 +23,7 @@ INSTALLAZIONE
 ---------------------------------------------------------------------------------------
 Nel pacchetto scaricabile dal sito troverai le cartelle "Docebo" e "patch_for_docebo_404".
 - La cartella "patch_for_docebo_404" contiene i file che devono essere aggiornati nell'installazione di Docebo 4.0.4 per far funzionare correttamente il modulo. Suggeriamo quindi di effettuare un backup dei file della tua installazione Docebo per poi procedere a sovrascrivere i nuovi file con quelli forniti.
-- La cartella "Docebo" è la cartella che deve essere messa dentro la cartella "app/code/local" della tua installazione di Magento.
+- La cartella "magento" contiene la cartella "app" che è la cartella che deve essere copiata dentro la cartella principale della tua installazione di Magento.
 
 
 Una volta caricati i file, è necessario configurare il modulo andando in amministrazione > system > configuration e selezionando Web > Docebo.
