@@ -38,7 +38,8 @@ class Docebo_Docebo_Model_Observer_Main {
 				$userdata['ext_user'] = $order->customer_id;
 				$userdata['ext_user_type'] = 'magento';
 
-				$res =$docebo_req::request('addusersubscription', $userdata, $order->customer_email, 'course');
+				//$res =$docebo_req::request('addusersubscription', $userdata, $order->customer_email, 'course');
+				$res = call_user_func(array($docebo_req, 'request'), 'addusersubscription', $userdata, $order->customer_email, 'course');
 			}
 			// ---
 		}
@@ -85,7 +86,8 @@ class Docebo_Docebo_Model_Observer_Main {
 		$userdata['ext_user'] = $observer->customer->getData('entity_id');
 		$userdata['ext_user_type'] = 'magento';
 
-		$res =$docebo_req::request('updateuser', $userdata, $observer->customer->getData('email'));
+		//$res =$docebo_req::request('updateuser', $userdata, $observer->customer->getData('email'));
+		$res = call_user_func(array($docebo_req, 'request'), 'updateuser', $userdata, $observer->customer->getData('email'));
 
 		
 		/* file_put_contents('mylog.txt', 'customer: '.
@@ -119,7 +121,8 @@ class Docebo_Docebo_Model_Observer_Main {
 			$userdata['ext_user'] = $customer_id;
 			$userdata['ext_user_type'] = 'magento';
 
-			$res =$docebo_req::request('createuser', $userdata, $observer->customer->getData('email'));
+			//$res =$docebo_req::request('createuser', $userdata, $observer->customer->getData('email'));
+			$res = call_user_func(array($docebo_req, 'request'), 'createuser', $userdata, $observer->customer->getData('email'));
 		}
 
 
