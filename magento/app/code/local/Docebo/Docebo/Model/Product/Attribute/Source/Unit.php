@@ -8,7 +8,7 @@ class Docebo_Docebo_Model_Product_Attribute_Source_Unit extends Mage_Eav_Model_E
 		if (!$this->_options) {
 
 			$userdata =array();
-			$docebo_req =Mage::helper('docebo/doceborequest');
+			$docebo_req =Mage::helper('docebo/doceboRequest');
 			$res = call_user_func(array($docebo_req, 'request'), 'courses', $userdata, false, 'course');
 			//$res = $docebo_req::request('courses', $userdata, false, 'course');
 			//var_export($res);

@@ -54,7 +54,7 @@ class Docebo_Docebo_Adminhtml_DoceboController extends Mage_Adminhtml_Controller
 
 		$res =false;
 		if (!empty($userdata)) {
-			$docebo_req =Mage::helper('docebo/doceborequest');
+			$docebo_req =Mage::helper('docebo/doceboRequest');
 			// $res = $docebo_req::request('importextusersfromemail', $userdata);
 			$res = call_user_func(array($docebo_req, 'request'), 'importextusersfromemail', $userdata);
 		}

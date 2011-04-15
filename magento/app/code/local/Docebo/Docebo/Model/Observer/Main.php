@@ -12,7 +12,7 @@ class Docebo_Docebo_Model_Observer_Main {
 
 		$order_id =$observer->event->invoice->order_id;
 		$order =Mage::getModel('sales/order')->load($order_id);
-		$docebo_req =Mage::helper('docebo/doceborequest');
+		$docebo_req =Mage::helper('docebo/doceboRequest');
 
 		$items_log ='';
 
@@ -77,7 +77,7 @@ class Docebo_Docebo_Model_Observer_Main {
 
 	public function customerSave($observer) {
 
-		$docebo_req =Mage::helper('docebo/doceborequest');
+		$docebo_req =Mage::helper('docebo/doceboRequest');
 
 		$userdata =array();
 		$userdata['email']=$observer->customer->getData('email');
@@ -109,7 +109,7 @@ class Docebo_Docebo_Model_Observer_Main {
 
 		if ($observer->customer->isObjectNew() && $customer_id > 0) { // only if it is a new customer:
 
-			$docebo_req =Mage::helper('docebo/doceborequest');
+			$docebo_req =Mage::helper('docebo/doceboRequest');
 
 			$userdata =array();
 			$userdata['userid'] = $observer->customer->getData('email');
